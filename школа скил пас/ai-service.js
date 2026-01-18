@@ -3,7 +3,7 @@
 
 class AIService {
   constructor() {
-    this.apiKey = '
+    this.apiKey = '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';
     this.provider = 'openai'; // openai, anthropic, huggingface, local
     this.baseURL = 'https://api.openai.com/v1';
     this.model = 'gpt-4o-mini'; // Более новая и быстрая модель, лучше понимает контекст
@@ -457,4 +457,5 @@ ${answer}
 
 // Создаем глобальный экземпляр
 const aiService = new AIService();
+
 
