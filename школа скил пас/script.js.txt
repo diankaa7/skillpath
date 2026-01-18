@@ -1,0 +1,864 @@
+// Данные для теста
+const surveyData = [
+  {
+    question: "Какой тип деятельности вам больше нравится?",
+    options: [
+      "Работа с людьми (общение, помощь, обучение)",
+      "Аналитическая работа (исследования, вычисления, анализ)",
+      "Творческая деятельность (дизайн, искусство, создание нового)",
+      "Техническая работа (техника, программы, инженерия)",
+      "Работа с природой (животные, растения, экология)",
+      "Предпринимательская деятельность (бизнес, управление, продажи)",
+    ],
+  },
+  {
+    question: "Как вы предпочитаете работать?",
+    options: [
+      "В команде, совместно с коллегами",
+      "Самостоятельно, концентрируясь на задаче",
+      "В гибком графике, с возможностью творческого подхода",
+      "По четкому плану с конкретными задачами",
+      "В динамичной среде с частыми изменениями",
+      "С возможностью работать удаленно",
+    ],
+  },
+  {
+    question: "Что для вас важнее в работе?",
+    options: [
+      "Стабильность и предсказуемость",
+      "Высокий доход и карьерный рост",
+      "Возможность самореализации и творчества",
+      "Социальная значимость и помощь другим",
+      "Гибкий график и свобода",
+      "Интересные задачи и вызовы",
+    ],
+  },
+  {
+    question: "Какой школьный предмет вам нравился больше всего?",
+    options: [
+      "Обществознание, литература, языки",
+      "Математика, физика, информатика",
+      "Искусство, музыка, технология",
+      "Биология, химия, география",
+      "История, право, экономика",
+      "Физкультура, ОБЖ, технология",
+    ],
+  },
+  {
+    question: "Как вы относитесь к рутинной работе?",
+    options: [
+      "Предпочитаю разнообразие и новые задачи",
+      "Могу работать в режиме рутины, если это необходимо",
+      "Стараюсь избегать повторяющихся задач",
+      "Рутина меня не пугает, если работа интересная",
+      "Предпочитаю чередовать рутину и творческие задачи",
+      "Могу адаптироваться к любому формату работы",
+    ],
+  },
+  {
+    question: "Что вам лучше удается?",
+    options: [
+      "Убеждать и договариваться с людьми",
+      "Анализировать данные и находить закономерности",
+      "Придумывать новые идеи и решения",
+      "Работать с техникой и технологиями",
+      "Организовывать и планировать процессы",
+      "Работать с естественными науками",
+    ],
+  },
+  {
+    question: "Какой график работы вам предпочтительнее?",
+    options: [
+      "Стандартный рабочий день с 9 до 18",
+      "Гибкий график с возможностью удаленной работы",
+      "Проектная работа с дедлайнами",
+      "Сменный график или ненормированный рабочий день",
+      "Частичная занятость или фриланс",
+      "Любой график, если работа интересная",
+    ],
+  },
+  {
+    question: "Что для вас важнее в карьере?",
+    options: [
+      "Стабильность и социальные гарантии",
+      "Высокий доход и престиж",
+      "Самореализация и интересные задачи",
+      "Возможность помогать другим и приносить пользу",
+      "Свобода и независимость",
+      "Карьерный рост и развитие",
+    ],
+  },
+  {
+    question: "Как вы относитесь к публичным выступлениям?",
+    options: [
+      "Комфортно чувствую себя перед аудиторией",
+      "Предпочитаю работать без публичных выступлений",
+      "Могу выступать, если хорошо подготовлен",
+      "Испытываю дискомфорт при выступлениях",
+      "Люблю выступать перед небольшой аудиторией",
+      "Выступления - не проблема, если тема интересная",
+    ],
+  },
+  {
+    question: "Какой тип задач вам интереснее?",
+    options: [
+      "Организационные и управленческие",
+      "Исследовательские и аналитические",
+      "Творческие и нестандартные",
+      "Технические и практические",
+      "Социальные и гуманитарные",
+      "Коммерческие и предпринимательские",
+    ],
+  },
+];
+
+// Список навыков для анализа
+const skillsList = {
+  "Коммуникативные навыки": {
+    description: "Умение общаться и договариваться с людьми",
+    icon: "fas fa-comments",
+  },
+  "Аналитическое мышление": {
+    description: "Способность анализировать данные и решать проблемы",
+    icon: "fas fa-brain",
+  },
+  "Творческий подход": {
+    description: "Умение генерировать новые идеи и решения",
+    icon: "fas fa-palette",
+  },
+  "Технические навыки": {
+    description: "Работа с техникой, программами и технологиями",
+    icon: "fas fa-laptop-code",
+  },
+  "Организационные способности": {
+    description: "Планирование, организация и управление процессами",
+    icon: "fas fa-tasks",
+  },
+  "Работа в команде": {
+    description: "Умение эффективно работать в коллективе",
+    icon: "fas fa-users",
+  },
+  Самостоятельность: {
+    description: "Способность работать независимо и принимать решения",
+    icon: "fas fa-user-check",
+  },
+  Адаптивность: {
+    description: "Умение приспосабливаться к изменениям",
+    icon: "fas fa-sync-alt",
+  },
+  "Управление проектами": {
+    description: "Планирование и контроль выполнения задач",
+    icon: "fas fa-project-diagram",
+  },
+  "Решение проблем": {
+    description: "Анализ и поиск решений сложных ситуаций",
+    icon: "fas fa-puzzle-piece",
+  },
+};
+
+let currentQuestion = 0;
+let userAnswers = [];
+let educationPath = "";
+
+// Определяем путь обучения (9 или 11 класс)
+function selectEducationPath(path) {
+  educationPath = path;
+  document.getElementById("education-path-selection").style.display = "none";
+  document.getElementById("survey-questions").style.display = "block";
+  document.getElementById("survey-navigation").style.display = "flex";
+  initSurvey();
+}
+
+// Инициализация теста
+function initSurvey() {
+  const surveyContainer = document.getElementById("survey-questions");
+  surveyContainer.innerHTML = "";
+  surveyData.forEach((question, index) => {
+    const questionElement = document.createElement("div");
+    questionElement.className = "question";
+    questionElement.style.display = index === 0 ? "block" : "none";
+    questionElement.id = `question-${index}`;
+    let optionsHTML = "";
+    question.options.forEach((option, optIndex) => {
+      optionsHTML += `
+        <div class="option">
+          <input type="radio" id="q${index}-opt${optIndex}" name="question-${index}" value="${optIndex}">
+          <label for="q${index}-opt${optIndex}">${option}</label>
+        </div>
+      `;
+    });
+    questionElement.innerHTML = `
+      <h3>${index + 1}. ${question.question}</h3>
+      <div class="options">
+        ${optionsHTML}
+      </div>
+    `;
+    surveyContainer.appendChild(questionElement);
+  });
+  updateNavigation();
+}
+
+// Обновление навигации
+function updateNavigation() {
+  const prevBtn = document.getElementById("prev-btn");
+  const nextBtn = document.getElementById("next-btn");
+  prevBtn.disabled = currentQuestion === 0;
+  if (currentQuestion === surveyData.length - 1) {
+    nextBtn.textContent = "Завершить опрос";
+  } else {
+    nextBtn.textContent = "Далее";
+  }
+}
+
+// Следующий вопрос
+function nextQuestion() {
+  const currentQuestionElement = document.getElementById(
+    `question-${currentQuestion}`
+  );
+  const selectedOption = currentQuestionElement.querySelector("input:checked");
+  if (!selectedOption) {
+    alert("Пожалуйста, выберите вариант ответа");
+    return;
+  }
+  userAnswers[currentQuestion] = parseInt(selectedOption.value);
+  if (currentQuestion < surveyData.length - 1) {
+    currentQuestionElement.style.display = "none";
+    currentQuestion++;
+    document.getElementById(`question-${currentQuestion}`).style.display =
+      "block";
+    updateNavigation();
+  } else {
+    showResults();
+  }
+}
+
+// Предыдущий вопрос
+function prevQuestion() {
+  if (currentQuestion > 0) {
+    document.getElementById(`question-${currentQuestion}`).style.display =
+      "none";
+    currentQuestion--;
+    document.getElementById(`question-${currentQuestion}`).style.display =
+      "block";
+    updateNavigation();
+  }
+}
+
+// Анализ навыков на основе ответов
+function analyzeSkills() {
+  const skillScores = {
+    "Коммуникативные навыки": 0,
+    "Аналитическое мышление": 0,
+    "Творческий подход": 0,
+    "Технические навыки": 0,
+    "Организационные способности": 0,
+    "Работа в команде": 0,
+    Самостоятельность: 0,
+    Адаптивность: 0,
+    "Управление проектами": 0,
+    "Решение проблем": 0,
+  };
+
+  userAnswers.forEach((answer, index) => {
+    switch (index) {
+      case 0:
+        if (answer === 0) {
+          skillScores["Коммуникативные навыки"] += 4;
+          skillScores["Работа в команде"] += 3;
+        } else if (answer === 1) {
+          skillScores["Аналитическое мышление"] += 4;
+          skillScores["Решение проблем"] += 3;
+        } else if (answer === 2) {
+          skillScores["Творческий подход"] += 4;
+          skillScores["Адаптивность"] += 2;
+        } else if (answer === 3) {
+          skillScores["Технические навыки"] += 4;
+          skillScores["Решение проблем"] += 3;
+        } else if (answer === 4) {
+          skillScores["Аналитическое мышление"] += 3;
+          skillScores["Самостоятельность"] += 3;
+        } else if (answer === 5) {
+          skillScores["Организационные способности"] += 4;
+          skillScores["Коммуникативные навыки"] += 3;
+        }
+        break;
+      case 1:
+        if (answer === 0) {
+          skillScores["Работа в команде"] += 3;
+          skillScores["Коммуникативные навыки"] += 2;
+        } else if (answer === 1) {
+          skillScores["Самостоятельность"] += 3;
+          skillScores["Решение проблем"] += 2;
+        } else if (answer === 2) {
+          skillScores["Творческий подход"] += 3;
+          skillScores["Адаптивность"] += 2;
+        } else if (answer === 3) {
+          skillScores["Организационные способности"] += 3;
+          skillScores["Управление проектами"] += 2;
+        } else if (answer === 4) {
+          skillScores["Адаптивность"] += 3;
+          skillScores["Творческий подход"] += 2;
+        } else if (answer === 5) {
+          skillScores["Самостоятельность"] += 3;
+          skillScores["Управление проектами"] += 2;
+        }
+        break;
+      case 2:
+        if (answer === 0) skillScores["Организационные способности"] += 3;
+        if (answer === 1) skillScores["Решение проблем"] += 3;
+        if (answer === 2) {
+          skillScores["Творческий подход"] += 3;
+          skillScores["Адаптивность"] += 2;
+        }
+        if (answer === 3) skillScores["Коммуникативные навыки"] += 3;
+        if (answer === 4) skillScores["Самостоятельность"] += 3;
+        if (answer === 5) skillScores["Аналитическое мышление"] += 3;
+        break;
+      case 3:
+        if (answer === 0) skillScores["Коммуникативные навыки"] += 3;
+        if (answer === 1) {
+          skillScores["Аналитическое мышление"] += 3;
+          skillScores["Технические навыки"] += 2;
+        }
+        if (answer === 2) skillScores["Творческий подход"] += 3;
+        if (answer === 3) skillScores["Аналитическое мышление"] += 3;
+        if (answer === 4) skillScores["Организационные способности"] += 3;
+        if (answer === 5) skillScores["Работа в команде"] += 3;
+        break;
+      case 4:
+        if ([0, 2].includes(answer)) skillScores["Адаптивность"] += 3;
+        if ([1, 3].includes(answer))
+          skillScores["Организационные способности"] += 3;
+        if (answer === 4) {
+          skillScores["Творческий подход"] += 2;
+          skillScores["Адаптивность"] += 2;
+        }
+        if (answer === 5) skillScores["Адаптивность"] += 4;
+        break;
+      case 5:
+        if (answer === 0) {
+          skillScores["Коммуникативные навыки"] += 4;
+          skillScores["Работа в команде"] += 2;
+        } else if (answer === 1) {
+          skillScores["Аналитическое мышление"] += 4;
+          skillScores["Решение проблем"] += 3;
+        } else if (answer === 2) {
+          skillScores["Творческий подход"] += 4;
+          skillScores["Адаптивность"] += 2;
+        } else if (answer === 3) {
+          skillScores["Технические навыки"] += 4;
+          skillScores["Решение проблем"] += 3;
+        } else if (answer === 4) {
+          skillScores["Организационные способности"] += 4;
+          skillScores["Управление проектами"] += 3;
+        } else if (answer === 5) {
+          skillScores["Аналитическое мышление"] += 3;
+          skillScores["Самостоятельность"] += 3;
+        }
+        break;
+      case 6:
+        if (answer === 0) skillScores["Организационные способности"] += 3;
+        if ([1, 4].includes(answer)) skillScores["Самостоятельность"] += 3;
+        if (answer === 2) skillScores["Управление проектами"] += 3;
+        if ([3, 5].includes(answer)) skillScores["Адаптивность"] += 3;
+        break;
+      case 7:
+        if (answer === 0) skillScores["Организационные способности"] += 3;
+        if (answer === 1) skillScores["Решение проблем"] += 3;
+        if (answer === 2) {
+          skillScores["Творческий подход"] += 3;
+          skillScores["Адаптивность"] += 2;
+        }
+        if (answer === 3) skillScores["Коммуникативные навыки"] += 3;
+        if (answer === 4) skillScores["Самостоятельность"] += 3;
+        if (answer === 5) skillScores["Управление проектами"] += 3;
+        break;
+      case 8:
+        if ([0, 2, 4].includes(answer))
+          skillScores["Коммуникативные навыки"] += 3;
+        if ([1, 3].includes(answer)) skillScores["Самостоятельность"] += 2;
+        if (answer === 5) skillScores["Адаптивность"] += 3;
+        break;
+      case 9:
+        if (answer === 0) {
+          skillScores["Организационные способности"] += 4;
+          skillScores["Управление проектами"] += 3;
+        } else if (answer === 1) {
+          skillScores["Аналитическое мышление"] += 4;
+          skillScores["Решение проблем"] += 3;
+        } else if (answer === 2) {
+          skillScores["Творческий подход"] += 4;
+          skillScores["Адаптивность"] += 3;
+        } else if (answer === 3) {
+          skillScores["Технические навыки"] += 4;
+          skillScores["Решение проблем"] += 3;
+        } else if (answer === 4) {
+          skillScores["Коммуникативные навыки"] += 4;
+          skillScores["Работа в команде"] += 3;
+        } else if (answer === 5) {
+          skillScores["Организационные способности"] += 4;
+          skillScores["Решение проблем"] += 3;
+        }
+        break;
+    }
+  });
+
+  const maxPossibleScore = 40;
+  const normalizedSkills = {};
+  for (const skill in skillScores) {
+    const score = Math.min(
+      100,
+      Math.max(0, (skillScores[skill] / maxPossibleScore) * 100)
+    );
+    normalizedSkills[skill] = Math.round(score);
+  }
+  return normalizedSkills;
+}
+
+// Получение сильных и слабых сторон
+function getStrengthsAndWeaknesses(skillScores) {
+  const sortedSkills = Object.entries(skillScores).sort((a, b) => b[1] - a[1]);
+  const strengths = sortedSkills.slice(0, 3).map(([skill, score]) => ({
+    skill,
+    score,
+    level: score >= 70 ? "strong" : score >= 40 ? "medium" : "weak",
+  }));
+  const weaknesses = sortedSkills
+    .slice(-3)
+    .map(([skill, score]) => ({
+      skill,
+      score,
+      level: score >= 70 ? "strong" : score >= 40 ? "medium" : "weak",
+    }))
+    .reverse();
+  return { strengths, weaknesses };
+}
+
+// Создание круговой диаграммы
+function createSkillChart(skillScores, elementId) {
+  const totalScore = Object.values(skillScores).reduce((a, b) => a + b, 0);
+  const avgScore = Math.round(totalScore / Object.keys(skillScores).length);
+  let chartHTML = `
+    <div class="chart-container">
+      <div class="chart-circle"></div>
+      <div class="chart-center">
+        <div class="chart-score">${avgScore}%</div>
+      </div>
+    </div>
+    <div class="skills-list">
+  `;
+
+  const skillsArray = Object.entries(skillScores)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 5);
+
+  skillsArray.forEach(([skill, score]) => {
+    const level = score >= 70 ? "strong" : score >= 40 ? "medium" : "weak";
+    const iconClass =
+      score >= 70 ? "icon-high" : score >= 40 ? "icon-medium" : "icon-low";
+    chartHTML += `
+      <div class="skill-item result-item">
+        <div class="skill-name">
+          <div class="skill-icon ${iconClass}">
+            <i class="${skillsList[skill]?.icon || "fas fa-star"}"></i>
+          </div>
+          ${skill}
+        </div>
+        <div class="skill-score ${level}">${score}%</div>
+      </div>
+      <div class="skill-progress">
+        <div class="skill-progress-bar progress-${level}" style="width: ${score}%"></div>
+      </div>
+    `;
+  });
+
+  chartHTML += `</div>`;
+  return chartHTML;
+}
+
+// Показать результаты
+function showResults() {
+  // Подбор профессии
+  const professionScores = {};
+  for (const profession in professions) {
+    professionScores[profession] = 0;
+  }
+
+  userAnswers.forEach((answer, index) => {
+    switch (index) {
+      case 0:
+        if (answer === 0) {
+          [
+            "Психолог",
+            "Учитель",
+            "Социолог",
+            "Врач",
+            "Менеджер по продажам",
+            "Переводчик",
+            "Журналист",
+          ].forEach((p) => (professionScores[p] += 4));
+        } else if (answer === 1) {
+          [
+            "Инженер-программист",
+            "Data Scientist",
+            "Аналитик данных",
+            "Финансовый советник",
+            "Маркетолог",
+            "Бухгалтер",
+            "Физик",
+            "Химик",
+          ].forEach((p) => (professionScores[p] += 4));
+        } else if (answer === 2) {
+          [
+            "Веб-дизайнер",
+            "Графический дизайнер",
+            "Архитектор",
+            "Иллюстратор",
+            "Фотограф",
+            "Видеооператор",
+          ].forEach((p) => (professionScores[p] += 4));
+        } else if (answer === 3) {
+          [
+            "Инженер-программист",
+            "Инженер-электроник",
+            "Инженер-строитель",
+            "Системный администратор",
+            "Специалист по кибербезопасности",
+          ].forEach((p) => (professionScores[p] += 4));
+        } else if (answer === 4) {
+          ["Ветеринар", "Биолог", "Эколог", "Геолог", "Метеоролог"].forEach(
+            (p) => (professionScores[p] += 4)
+          );
+        } else if (answer === 5) {
+          [
+            "Предприниматель",
+            "Менеджер по продажам",
+            "Маркетолог",
+            "Финансовый советник",
+          ].forEach((p) => (professionScores[p] += 4));
+        }
+        break;
+      case 1:
+        if (answer === 0) {
+          ["Учитель", "Врач", "Психолог", "Менеджер по продажам"].forEach(
+            (p) => (professionScores[p] += 3)
+          );
+        } else if (answer === 1) {
+          [
+            "Инженер-программист",
+            "Дизайнер",
+            "Писатель",
+            "Исследователь",
+          ].forEach((p) => (professionScores[p] += 3));
+        } else if (answer === 2) {
+          ["Дизайнер", "Программист", "Копирайтер"].forEach(
+            (p) => (professionScores[p] += 3)
+          );
+        }
+        break;
+      case 3:
+        if (answer === 0) {
+          ["Психолог", "Учитель", "Журналист", "Переводчик", "Юрист"].forEach(
+            (p) => (professionScores[p] += 3)
+          );
+        } else if (answer === 1) {
+          ["Инженер-программист", "Физик", "Инженер", "Математик"].forEach(
+            (p) => (professionScores[p] += 3)
+          );
+        } else if (answer === 2) {
+          ["Дизайнер", "Архитектор", "Художник", "Музыкант"].forEach(
+            (p) => (professionScores[p] += 3)
+          );
+        } else if (answer === 3) {
+          ["Врач", "Биолог", "Химик", "Эколог"].forEach(
+            (p) => (professionScores[p] += 3)
+          );
+        }
+        break;
+    }
+  });
+
+  // Фильтруем профессии по пути обучения
+  const filteredProfessions = {};
+  for (const profession in professionScores) {
+    if (
+      professions[profession] &&
+      (professions[profession].path === "both" ||
+        professions[profession].path === educationPath)
+    ) {
+      filteredProfessions[profession] = professionScores[profession];
+    }
+  }
+
+  let recommendedProfession = "Инженер-программист";
+  let maxScore = 0;
+  for (const profession in filteredProfessions) {
+    if (filteredProfessions[profession] > maxScore) {
+      maxScore = filteredProfessions[profession];
+      recommendedProfession = profession;
+    }
+  }
+
+  if (maxScore === 0 || !professions[recommendedProfession]) {
+    const suitableProfessions = Object.keys(professions).filter(
+      (prof) =>
+        professions[prof] &&
+        (professions[prof].path === "both" ||
+          professions[prof].path === educationPath)
+    );
+    if (suitableProfessions.length > 0) {
+      recommendedProfession =
+        suitableProfessions[
+          Math.floor(Math.random() * suitableProfessions.length)
+        ];
+    } else {
+      recommendedProfession = "Инженер-программист";
+    }
+  }
+
+  const professionData =
+    professions[recommendedProfession] || professions["Инженер-программист"];
+
+  // Анализ навыков
+  const skillScores = analyzeSkills();
+  const { strengths, weaknesses } = getStrengthsAndWeaknesses(skillScores);
+
+  const surveyContainer = document.querySelector(".survey-container");
+  surveyContainer.innerHTML = `
+    <div class="result-container">
+      <div class="result-title">Результаты профориентационного теста</div>
+      <div class="profession">${recommendedProfession}</div>
+      <p style="font-size: 1.2rem; color: var(--text-light); margin-bottom: 40px;">
+        ${professionData.description}
+      </p>
+
+      <div class="analysis-section">
+        <h2 class="section-heading">
+          <i class="fas fa-chart-pie"></i>
+          Анализ ваших навыков
+        </h2>
+        <div class="skills-analysis">
+          <div class="skills-card result-item">
+            <h3><i class="fas fa-trophy" style="color: var(--chart-strong);"></i> Сильные стороны</h3>
+            ${createSkillChart(
+              strengths.reduce((acc, item) => {
+                acc[item.skill] = item.score;
+                return acc;
+              }, {}),
+              "strengths-chart"
+            )}
+          </div>
+          <div class="skills-card result-item">
+            <h3><i class="fas fa-exclamation-triangle" style="color: var(--chart-medium);"></i> Зоны роста</h3>
+            ${createSkillChart(
+              weaknesses.reduce((acc, item) => {
+                acc[item.skill] = item.score;
+                return acc;
+              }, {}),
+              "weaknesses-chart"
+            )}
+          </div>
+        </div>
+      </div>
+
+      <div class="recommendations result-item">
+        <h3><i class="fas fa-lightbulb"></i> Рекомендации по развитию</h3>
+        <ul class="recommendations-list">
+          ${strengths
+            .slice(0, 2)
+            .map(
+              (item) =>
+                `<li>Продолжайте развивать <strong>${item.skill.toLowerCase()}</strong> (${
+                  item.score
+                }%) - это ваша сильная сторона</li>`
+            )
+            .join("")}
+          ${weaknesses
+            .slice(0, 2)
+            .map(
+              (item) =>
+                `<li>Уделите внимание развитию <strong>${item.skill.toLowerCase()}</strong> (${
+                  item.score
+                }%) - это повысит вашу конкурентоспособность</li>`
+            )
+            .join("")}
+          <li>Сочетайте сильные навыки для максимальной эффективности в выбранной профессии</li>
+          <li>Рассмотрите курсы повышения квалификации по выявленным зонам роста</li>
+        </ul>
+      </div>
+
+      <div class="exam-info result-item">
+        <h3><i class="fas fa-graduation-cap"></i> Информация для поступления</h3>
+        <p><strong>${
+          educationPath === "9"
+            ? "Профили для поступления в колледж:"
+            : "Необходимые профили:"
+        }</strong></p>
+        <ul>
+          ${professionData.subjects
+            .map((subject) => `<li>${subject}</li>`)
+            .join("")}
+        </ul>
+        <p style="margin-top: 15px;">
+  <strong>Средний ${
+    educationPath === "9" ? "балл аттестата" : "проходной балл"
+  }:</strong>
+  <span style="font-size: 1.2rem; font-weight: 700; color: var(--primary);">
+    ${
+      educationPath === "9"
+        ? professionData.avgScore > 10
+          ? (professionData.avgScore / 17).toFixed(1).replace(".", ",")
+          : professionData.avgScore.toFixed(1).replace(".", ",")
+        : professionData.avgScore
+    }${educationPath === "9" ? "" : " баллов"}
+  </span>
+</p>
+        <p style="margin-top: 10px; color: var(--text-muted); font-size: 0.9rem;">
+          <i class="fas fa-info-circle"></i> Обратите внимание: баллы могут меняться в зависимости от вуза и года поступления
+        </p>
+      </div>
+
+      <div class="city-selection result-item">
+        <h3><i class="fas fa-map-marker-alt"></i> Выберите город для поступления:</h3>
+        <div class="city-grid" id="city-options">
+          ${Object.keys(educationInstitutions)
+            .map(
+              (city) =>
+                `<div class="city-option" onclick="selectCity('${city}')">${city}</div>`
+            )
+            .join("")}
+        </div>
+        <div id="institutions-list" class="universities-list"></div>
+      </div>
+
+      <button class="restart-button" onclick="restartSurvey()">
+        <i class="fas fa-redo"></i> Пройти тест заново
+      </button>
+    </div>
+  `;
+}
+
+// ✅ НОВАЯ функция выбора города — только названия заведений
+function selectCity(city) {
+  const cityOptions = document.querySelectorAll(".city-option");
+  cityOptions.forEach((option) => option.classList.remove("selected"));
+  event.target.classList.add("selected");
+
+  const institutionsList = document.getElementById("institutions-list");
+  const cityData = educationInstitutions[city];
+
+  if (!cityData) {
+    institutionsList.innerHTML = `<p style="color: var(--text-light); text-align: center;">Нет данных об учебных заведениях в этом городе</p>`;
+    return;
+  }
+
+  const institutions =
+    educationPath === "9" ? cityData.colleges : cityData.universities;
+
+  if (!institutions || institutions.length === 0) {
+    institutionsList.innerHTML = `<p style="color: var(--text-light); text-align: center;">Нет данных об учебных заведениях</p>`;
+    return;
+  }
+
+  // Выводим только названия
+  const names = institutions.map((inst) => inst.name);
+  institutionsList.innerHTML = `
+    <h4 style="margin: 20px 0 15px 0; color: var(--text-dark);">
+      <i class="fas fa-university"></i> ${
+        educationPath === "9" ? "Колледжи" : "Вузы"
+      } в ${city}:
+    </h4>
+    <ul style="list-style-type: none; padding: 0; margin: 0;">
+      ${names
+        .map(
+          (name) =>
+            `<li style="padding: 8px 0; border-bottom: 1px solid var(--border-color);">${name}</li>`
+        )
+        .join("")}
+    </ul>
+  `;
+}
+
+// Перезапуск опроса
+function restartSurvey() {
+  currentQuestion = 0;
+  userAnswers = [];
+  educationPath = "";
+  const surveyContainer = document.querySelector(".survey-container");
+  surveyContainer.innerHTML = `
+    <div id="education-path-selection">
+      <h2>Выберите ваш образовательный путь</h2>
+      <p>Это поможет нам подобрать подходящие варианты для вашего поступления</p>
+      <div class="path-selection">
+        <div class="path-option" onclick="selectEducationPath('9')">
+          <h3>После 9 класса</h3>
+          <p>Поступление в колледж или техникум</p>
+          <p><small>На основе ОГЭ</small></p>
+        </div>
+        <div class="path-option" onclick="selectEducationPath('11')">
+          <h3>После 11 класса</h3>
+          <p>Поступление в университет или институт</p>
+          <p><small>На основе ЕГЭ</small></p>
+        </div>
+      </div>
+    </div>
+    <div id="survey-questions" style="display: none;"></div>
+    <div class="survey-nav" id="survey-navigation" style="display: none;">
+      <button class="survey-button" id="prev-btn" onclick="prevQuestion()">Назад</button>
+      <button class="survey-button" id="next-btn" onclick="nextQuestion()">Далее</button>
+    </div>
+  `;
+}
+
+// Показать страницу
+function showPage(pageId) {
+  document.getElementById("home-page").style.display =
+    pageId === "home" ? "flex" : "none";
+  document.getElementById("survey-page").style.display =
+    pageId === "survey" ? "block" : "none";
+  if (pageId === "survey") {
+    restartSurvey();
+    setTimeout(() => {
+      document
+        .getElementById("survey-page")
+        .scrollIntoView({ behavior: "smooth" });
+    }, 100);
+  } else {
+    window.scrollTo(0, 0);
+  }
+}
+
+// Инициализация
+document.addEventListener("DOMContentLoaded", function () {
+  document.getElementById("current-year").textContent =
+    new Date().getFullYear();
+
+  // Плавная прокрутка
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener("click", function (e) {
+      e.preventDefault();
+      const targetId = this.getAttribute("href");
+      if (targetId === "#") return;
+      const targetElement = document.querySelector(targetId);
+      if (targetElement) {
+        window.scrollTo({
+          top: targetElement.offsetTop - 80,
+          behavior: "smooth",
+        });
+      }
+    });
+  });
+
+  // Параллакс и хедер
+  window.addEventListener("scroll", function () {
+    const scrolled = window.pageYOffset;
+    const header = document.getElementById("header");
+    if (header) {
+      if (scrolled > 100) {
+        header.classList.add("scrolled");
+      } else {
+        header.classList.remove("scrolled");
+      }
+    }
+  });
+});

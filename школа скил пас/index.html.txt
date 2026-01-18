@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SkillPath - AI Карьерный Навигатор</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <video autoplay muted loop class="video-background">
+      <source
+        src="https://assets.mixkit.co/videos/preview/mixkit-network-connection-data-transfer-animation-49176-large.mp4"
+        type="video/mp4"
+      />
+    </video>
+
+    <div class="sparkle" style="top: 20%; left: 10%; animation-delay: 0s"></div>
+    <div class="sparkle" style="top: 60%; left: 85%; animation-delay: 1s"></div>
+    <div class="sparkle" style="top: 80%; left: 20%; animation-delay: 2s"></div>
+    <div
+      class="sparkle"
+      style="top: 30%; left: 70%; animation-delay: 1.5s"
+    ></div>
+
+    <header id="header">
+      <div class="container">
+        <nav>
+          <a href="#" class="logo" onclick="showPage('home')">
+            <i class="fas fa-route"></i>
+            Skill<span class="logo-glow">Path</span>
+          </a>
+          <div class="nav-links">
+            <a href="#" onclick="showPage('home')">Главная</a>
+            <a href="#" onclick="showPage('survey')">Тестирование</a>
+            <a href="#" onclick="showPage('features')">Преимущества</a>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <!-- Hero Section - Центрированная -->
+      <section class="hero" id="home-page">
+        <div class="hero-bg"></div>
+        <div class="container hero-container">
+          <div class="hero-content">
+            <h1>Карьера будущего<br />начинается здесь</h1>
+            <p>
+              Искусственный интеллект анализирует ваш потенциал и строит
+              персонализированный путь к профессии мечты. Начните свой путь к
+              успеху уже сегодня.
+            </p>
+            <div class="cta-container">
+              <a href="#" class="cta-button" onclick="showPage('survey')">
+                Пройти тестирование
+                <i class="fas fa-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="how-it-works">
+        <div class="container">
+          <div class="section-title">
+            <h2>Как это работает</h2>
+            <p>
+              Инновационный подход к построению карьеры с использованием
+              передовых технологий
+            </p>
+          </div>
+          <div class="steps">
+            <div class="step">
+              <div class="step-icon">
+                <i class="fas fa-clipboard-list"></i>
+              </div>
+              <h3>Пройти тестирование</h3>
+              <p>
+                Ответьте на вопросы о ваших интересах, навыках и карьерных
+                предпочтениях
+              </p>
+            </div>
+            <div class="step">
+              <div class="step-icon">
+                <i class="fas fa-brain"></i>
+              </div>
+              <h3>AI Анализ</h3>
+              <p>
+                Нейросеть обрабатывает ваши ответы и сравнивает с актуальными
+                данными рынка труда
+              </p>
+            </div>
+            <div class="step">
+              <div class="step-icon">
+                <i class="fas fa-rocket"></i>
+              </div>
+              <h3>Персональный план</h3>
+              <p>
+                Получите детализированную дорожную карту развития с пошаговыми
+                рекомендациями
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="features">
+        <div class="container">
+          <div class="section-title">
+            <h2>Преимущества SkillPath</h2>
+            <p>Инновационный подход к построению карьеры в цифровую эпоху</p>
+          </div>
+          <div class="features">
+            <div class="feature">
+              <i class="fas fa-bolt"></i>
+              <h3>Мгновенный AI-анализ</h3>
+              <p>
+                Нейросеть обрабатывает ваши данные в реальном времени и выдает
+                персонализированные рекомендации за секунды
+              </p>
+            </div>
+            <div class="feature">
+              <i class="fas fa-chart-network"></i>
+              <h3>Актуальные данные рынка</h3>
+              <p>
+                Анализ тысяч вакансий и трендов для построения наиболее
+                востребованных карьерных путей
+              </p>
+            </div>
+            <div class="feature">
+              <i class="fas fa-user-astronaut"></i>
+              <h3>Персональный подход</h3>
+              <p>
+                Учет вашего уникального опыта, навыков и карьерных амбиций при
+                построении трека развития
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Survey Section -->
+      <section class="survey-page" id="survey-page">
+        <div class="container">
+          <div class="survey-container">
+            <!-- Выбор пути после 9 или 11 класса -->
+            <div id="education-path-selection">
+              <h2>Выберите ваш образовательный путь</h2>
+              <p>
+                Это поможет нам подобрать подходящие варианты для вашего
+                поступления
+              </p>
+
+              <div class="path-selection">
+                <div class="path-option" onclick="selectEducationPath('9')">
+                  <h3>После 9 класса</h3>
+                  <p>Поступление в колледж или техникум</p>
+                  <p><small>На основе ОГЭ</small></p>
+                </div>
+                <div class="path-option" onclick="selectEducationPath('11')">
+                  <h3>После 11 класса</h3>
+                  <p>Поступление в университет или институт</p>
+                  <p><small>На основе ЕГЭ</small></p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Вопросы теста -->
+            <div id="survey-questions" style="display: none"></div>
+
+            <!-- Навигация -->
+            <div
+              class="survey-nav"
+              id="survey-navigation"
+              style="display: none"
+            >
+              <button
+                class="survey-button"
+                id="prev-btn"
+                onclick="prevQuestion()"
+              >
+                Назад
+              </button>
+              <button
+                class="survey-button"
+                id="next-btn"
+                onclick="nextQuestion()"
+              >
+                Далее
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-logo">
+            <i class="fas fa-route"></i>
+            Skill<span class="logo-glow">Path</span>
+          </div>
+          <div class="footer-links">
+            <a href="#" onclick="showPage('home')">Главная</a>
+            <a href="#" onclick="showPage('survey')">Тестирование</a>
+            <a href="#features">Преимущества</a>
+          </div>
+        </div>
+        <div class="copyright">
+          <p>
+            &copy; <span id="current-year"></span> SkillPath. Все права
+            защищены. | AI Карьерный Навигатор
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="professions.js"></script>
+    <script src="institutions.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
